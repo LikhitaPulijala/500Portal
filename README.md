@@ -51,13 +51,14 @@ Access-Control-Allow-Origin:https://500appss.appup.cloud
 Access-Control-Allow-Credentials:true
 
 Once the sign up process is done, a jwt token shall be set with payload data
-
+```javascript
 {
   "sub": "jwt",
   "email": "take1gk@yopmail.com",
   "tenant_id": "1077",
   "user_id": "1131"
 }
+```
 email - the new customer’s email address. 
 tenant_id - the account id of the customer account in 500 portal
 user_id - the user id of the customer account in 500 portal
@@ -130,7 +131,7 @@ RETURNS
 
 A JSON array with all user info and their related product/roles would be returned with 200 OK Response.
 
-
+```javascript
 [
     {
         "user_id": 1,
@@ -167,7 +168,7 @@ A JSON array with all user info and their related product/roles would be returne
         ]
     }
 ]
-
+```
 ### Get domain details :
 This api shall be used to get the domain details, like who is the domain owner and when was it opened.
 
@@ -192,11 +193,13 @@ Assumption: The customer has already setup 500 portal account.
 #### Case 3: Bulk invite of users :
 https://{{{app.500_server}}}/core/api/inviteuser
 Method:Post
+
 Body:
+```javascript
 email: user1@yopmail.com;user2@yopmail.com
 message: test invite link
 invite_link: https://{{{app.500_server}}}/#/signup?ZG9tYWluX2lkPTE0NDEmaG91cnM9MTYmbWludXRlcz0yOSZzZWNvbmRzPTcmZGF0ZT0yNS8wNC8yMDE5&app={{appname}}
-
+```
 Invite_link is generated in js
 var d = new Date();
 var hours = d.getHours();
