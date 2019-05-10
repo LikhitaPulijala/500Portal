@@ -41,11 +41,13 @@ This document talks about integrating other applications with 500Portal .
 
 #### Case 1 - Customer clicks on Sign up button :
 There should be a workflow with below trigger expression. The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
- 
-https://<<appname>>.appup.cloud/<<appname>>/accountsignup with POST method.
 
 The workflow has to set two values in headers to avoid CORS issue and then a successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side.
+ 
+Method:POST
+
 ```sh
+curl https://<<appname>>.appup.cloud/<<appname>>/accountsignup 
 -H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
 -H "Access-Control-Allow-Credentials:true"
 ```
