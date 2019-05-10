@@ -220,27 +220,22 @@ There should be a three workflow with a rest node in it.
 <apps-launcher url="<<url to hit the defined workflow>>"/>
 
 #### a)Rest call to intimate inside the workflow
------------------------------------------------------ 
 restcall:{{{app.500_server}}}/core/api/getallmyapps?appname=yourapp;
 method:get;
 headers:token:jwt_token;
 
 #### b)Trigger at Appside
--------------------------
 core/api/ninedots/{appname}
 
 #### c)Workflow at Appside for the trigger
-----------------------------------------------
 restcall:{{{app.500_server}}}/core/api/ninedots/{{{request.path.appname}}}?app=yourapp;
 method:get;
 headers:token:jwt_token;
 
 #### d)Trigger at Appside
-------------------------
 core/api/product/{id}
 
 #### e)Workflow at Appside for the trigger
-----------------------------------------------
 restcall:{{app.500_server}}/core/api/product/{{request.path.id}}?app=yourapp;
 method:get;
 headers:token:jwt_token;
