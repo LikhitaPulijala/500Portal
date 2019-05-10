@@ -1,6 +1,6 @@
 Table of contents
 =================
-**[Sign up](#)**
+**[Sign up](#Sign up)**
   * [Case 1 - Customer clicks on Sign up button](https://github.com/agilecrm/python-api)
   * [Case 2 - Customer enters email address and clicks “Try for Free”](https://github.com/agilecrm/python-api)
   * [Case 3 - Customer signs up with google or facebook](https://github.com/agilecrm/php-api)
