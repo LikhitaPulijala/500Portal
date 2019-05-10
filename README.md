@@ -101,7 +101,7 @@ Coming soon
 ### Get user profile :
 This rest api shall be used to get a particular user profile of a given domain
 ```sh
-https://500appss.appup.cloud/copy500apps/users/36?domain_id=1
+curl https://500appss.appup.cloud/copy500apps/users/36?domain_id=1
 ```
 RETURNS 
 
@@ -128,7 +128,7 @@ This rest api shall be called to get all users info for a given domain id.
 
 Method: GET
 ```sh
-https://500appss.appup.cloud/copy500apps/users?domain_id=1
+curl https://500appss.appup.cloud/copy500apps/users?domain_id=1
 ```
 RETURNS
 
