@@ -26,7 +26,9 @@ Table of contents
 
 **[9 dots](#9-dots-)**
 
-Things to know:
+**[Logout](#logout-)**
+
+
 ---------------  
 ### 500 portal integration :
 All the apps has to be integrated with 500 portal to handle the sign up and sign in process. In addition 500 portal takes care of inviting users, billing, invoicing, cancellations, buy/cancel several apps.
