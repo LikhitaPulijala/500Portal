@@ -32,25 +32,25 @@ Table of contents
 
 
 ---------------  
-### 500 portal integration :
-All the apps has to be integrated with 500 portal to handle the sign up and sign in process. In addition 500 portal takes care of inviting users, billing, invoicing, cancellations, buy/cancel several apps.
+### 500portal integration :
+All the apps should be integrated with 500portal to handle the sign up and sign in process. In addition,500 portal takes care of inviting users, billing, invoicing, cancellations, buy/cancel several apps.
 
-This document talks about integrating various  
+This document talks about integrating other applications with 500Portal .  
 
 ### Sign up :  
 
 #### Case 1 - Customer clicks on Sign up button :
 There should be a workflow with below trigger expression. The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
  
-https://<<appname>>.appup.cloud/<<appname>>/accountsignup with POST method
+https://<<appname>>.appup.cloud/<<appname>>/accountsignup with POST method.
 
-
-The workflow has to set two headers to avoid CORS issue and successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side
+The workflow has to set two values in headers to avoid CORS issue and then a successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side.
 
 Access-Control-Allow-Origin:https://500appss.appup.cloud
+
 Access-Control-Allow-Credentials:true
 
-Once the sign up process is done, A jwt token shall be set with payload data 
+Once the sign up process is done, a jwt token shall be set with payload data
 
 {
   "sub": "jwt",
@@ -58,16 +58,14 @@ Once the sign up process is done, A jwt token shall be set with payload data
   "tenant_id": "1077",
   "user_id": "1131"
 }
-
 email - the new customer’s email address. 
 tenant_id - the account id of the customer account in 500 portal
 user_id - the user id of the customer account in 500 portal
 
-The 500 portal shall route to the app’s home page as below
-
+Then the 500portal shall route to the app’s home page as below
 https://<<appname>>.appup.cloud/<<appname>>/#/home
 
-Below url is sample to test the sign up with no email
+Below is the sample url to test the sign up with no email
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/1
 
 #### Case 2 - Customer enters email address and clicks “Try for Free” :
@@ -76,23 +74,23 @@ This is same as above except the email is included. This is needed with the assu
 
 ![Alt text](https://www.google.com/logos/doodles/2019/lucy-wills-131st-birthday-5156345727680512-s.png")
 
-Below url is sample to test the sign up with email
+Below is the sample url to test the sign up with email
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/take2gk@yopmail.com/2
 
 #### Case 3 - Customer signs up with google or facebook :
-Below url is sample to test the sign up with google oauth
+Below is the sample url to test the sign up with google oauth
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/google
 
 
 ### Sign in : 
 
 #### Case 1 - Customer clicks on login :
-Here 500 portal shall validate the user credentials and when successful shall set the jwt as detailed above and route it to home page. 
+Here 500 portal shall validate the user credentials and when it logins successfully it sets the jwt as shown above and routes it to the home page. 
 https://<<appname>>.appup.cloud/<<appname>>/#/home
 
 
 
-Below url is sample to test the sign up with email
+Below is the sample url to test the sign in with email
 https://500appss.appup.cloud/copy500apps/#/signin/collab2
 
 #### Case 2 - Customer login with google and facebook :
@@ -130,7 +128,7 @@ https://500appss.appup.cloud/copy500apps/users?domain_id=1
 
 RETURNS
 
-A JSON Array with all user info and their related product/roles would be returned with 200 Ok Response
+A JSON array with all user info and their related product/roles would be returned with 200 OK Response.
 
 
 [
@@ -173,28 +171,28 @@ A JSON Array with all user info and their related product/roles would be returne
 ### Get domain details :
 This api shall be used to get the domain details, like who is the domain owner and when was it opened.
 
-<<TBD>>
+<< TBD >>
 	
 ### Invite user/Add user : 
 
 #### Case 1: 500 portal is used to add the new user :	
 Whenever the domain owner adds a new user to one or more products. The system shall do the necessary verification and setup on its end and may call the below rest api that is expected to be present on the app side. This is to give the app a hook to perform any actions needed for the new user.
 
-https://<<appname>>.appup.cloud/<<appname>>/users for each product with POST method.
+https://<< appname >>.appup.cloud/<< appname >>/users for each product with POST method.
 	
 #### Case 2: Migration of users :	
-This scenario happens for example when migrating customers and their users from AgileCRM to Supportly. 
+This scenario happens when migrating customers and their users from AgileCRM to Supportly. 
 
-A rest api on the 500 portal side has to be called upon to add all the new users.
+A rest api on the 500portal side has to be called upon to add all the new users.
 
-<<TBD>>
+<< TBD >>
 
 Assumption: The customer has already setup 500 portal account. 
 
 #### Case 3: Bulk invite of users :
 https://{{{app.500_server}}}/core/api/inviteuser
-Method:post
-bosy:
+Method:Post
+Body:
 email: user1@yopmail.com;user2@yopmail.com
 message: test invite link
 invite_link: https://{{{app.500_server}}}/#/signup?ZG9tYWluX2lkPTE0NDEmaG91cnM9MTYmbWludXRlcz0yOSZzZWNvbmRzPTcmZGF0ZT0yNS8wNC8yMDE5&app={{appname}}
@@ -212,7 +210,7 @@ var b = btoa(params);
 
 ### Add a new product to existing user :
 This will be treated same as invite user/add user section. The below api on the app side shall be called upon 
-https://<<appname>>.appup.cloud/<<appname>>/adduser for each product with POST method.
+https://<< appname >>.appup.cloud/<< appname >>/adduser for each product with POST method.
 
 ### Remove Subscription :
 When the domain owner removes an user to one or more products. The system shall perform necessary business validations on its end and may call the below rest api on the app side
@@ -220,7 +218,7 @@ When the domain owner removes an user to one or more products. The system shall 
 https://<< appname >>.appup.cloud/<< appname >>/removeuser for each product with DELETE method.
 
 ### 9 dots :
-There should be a three workflow with a rest node in it.
+There should be a workflow with a rest node in it.
 
 <apps-launcher url="<<url to hit the defined workflow>>"/>
 
