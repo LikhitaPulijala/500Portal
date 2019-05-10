@@ -45,11 +45,10 @@ There should be a workflow with below trigger expression. The idea is once the 5
 https://<<appname>>.appup.cloud/<<appname>>/accountsignup with POST method.
 
 The workflow has to set two values in headers to avoid CORS issue and then a successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side.
-
-Access-Control-Allow-Origin:https://500appss.appup.cloud
-
-Access-Control-Allow-Credentials:true
-
+```sh
+-H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
+-H "Access-Control-Allow-Credentials:true"
+```
 Once the sign up process is done, a jwt token shall be set with payload data
 ```javascript
 {
@@ -60,7 +59,9 @@ Once the sign up process is done, a jwt token shall be set with payload data
 }
 ```
 email - the new customer’s email address. 
-tenant_id - the account id of the customer account in 500 portal
+
+tenant_id - the account id of the customer account in 500 portal.
+
 user_id - the user id of the customer account in 500 portal
 
 Then the 500portal shall route to the app’s home page as below
@@ -99,8 +100,9 @@ Coming soon
 
 ### Get user profile :
 This rest api shall be used to get a particular user profile of a given domain
+```sh
 https://500appss.appup.cloud/copy500apps/users/36?domain_id=1
-
+```
 RETURNS 
 
 A JSON Object with his profile info and product roles
@@ -125,8 +127,9 @@ A JSON Object with his profile info and product roles
 This rest api shall be called to get all users info for a given domain id.
 
 Method: GET
+```sh
 https://500appss.appup.cloud/copy500apps/users?domain_id=1
-
+```
 RETURNS
 
 A JSON array with all user info and their related product/roles would be returned with 200 OK Response.
@@ -204,24 +207,40 @@ message: test invite link
 invite_link: https://{{{app.500_server}}}/#/signup?ZG9tYWluX2lkPTE0NDEmaG91cnM9MTYmbWludXRlcz0yOSZzZWNvbmRzPTcmZGF0ZT0yNS8wNC8yMDE5&app={{appname}}
 ```
 Invite_link is generated in js
+
 var d = new Date();
+
 var hours = d.getHours();
+
 var minutes = d.getMinutes();
+
 var seconds = d.getSeconds();
+
 var date = new Date().toLocaleString().split(',')[0];
+
 var params = "domain_id="+this.domain+"&hours="+hours+"&minutes="+minutes+"&seconds="+seconds+"&date="+date;
+
 var b = btoa(params);
 
  https://{{{app.500_server}}}/#/signup?b&app={{appname}}
 
 ### Add a new product to existing user :
-This will be treated same as invite user/add user section. The below api on the app side shall be called upon 
-https://<< appname >>.appup.cloud/<< appname >>/adduser for each product with POST method.
+This will be treated same as invite user/add user section. The below api on the app side shall be called upon for each product.
+
+Method:POST
+```sh
+https://<< appname >>.appup.cloud/<< appname >>/adduser
+```
 
 ### Remove Subscription :
-When the domain owner removes an user to one or more products. The system shall perform necessary business validations on its end and may call the below rest api on the app side
+When the domain owner removes an user to one or more products. The system shall perform necessary business validations on its end and may call the below rest api on the app side for each product.
 
-https://<< appname >>.appup.cloud/<< appname >>/removeuser for each product with DELETE method.
+Method:DELETE
+
+```sh
+
+https://<< appname >>.appup.cloud/<< appname >>/removeuser
+```
 
 ### 9 dots :
 There should be a workflow with a rest node in it.
@@ -229,26 +248,31 @@ There should be a workflow with a rest node in it.
 <apps-launcher url="<<url to hit the defined workflow>>"/>
 
 #### a)Rest call to intimate inside the workflow
-restcall:{{{app.500_server}}}/core/api/getallmyapps?appname=yourapp;
-method:get;
-headers:token:jwt_token;
 
+Method:GET;
+```sh
+curl {{{app.500_server}}}/core/api/getallmyapps?appname=yourapp
+-H "token:jwt_token"
+```
 #### b)Trigger at Appside
 core/api/ninedots/{appname}
 
 #### c)Workflow at Appside for the trigger
-restcall:{{{app.500_server}}}/core/api/ninedots/{{{request.path.appname}}}?app=yourapp;
-method:get;
-headers:token:jwt_token;
-
+Method:GET;
+```sh
+curl {{{app.500_server}}}/core/api/ninedots/{{{request.path.appname}}}?app=yourapp
+-H "token:jwt_token"
+```
 #### d)Trigger at Appside
 core/api/product/{id}
 
 #### e)Workflow at Appside for the trigger
-restcall:{{app.500_server}}/core/api/product/{{request.path.id}}?app=yourapp;
-method:get;
-headers:token:jwt_token;
+Method:GET
 
+```sh
+curl {{app.500_server}}/core/api/product/{{request.path.id}}?app=yourapp
+-H "token:jwt_token"
+```
 
 ### Logout :
 Remove token in the cookie and redirect to login page.
