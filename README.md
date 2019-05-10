@@ -103,7 +103,7 @@ https://500appss.appup.cloud/copy500apps/users/36?domain_id=1
 RETURNS 
 
 A JSON Object with his profile info and product roles
-
+```javascript
 {
     "domain_id": 1,
     "name": "sdf",
@@ -119,7 +119,7 @@ A JSON Object with his profile info and product roles
         }
     ]
 }
-
+```
 ### Get all users :
 This rest api shall be called to get all users info for a given domain id.
 
