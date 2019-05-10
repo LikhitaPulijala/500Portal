@@ -1,6 +1,6 @@
 Table of contents
 =================
-**[500Portal Integration](#500-portal-integration-)**
+**[500Portal Integration](#500portal-integration-)**
 
 **[Sign up](#sign-up-)**
   * [Case 1 - Customer clicks on Sign up button](#case-1---customer-clicks-on-sign-up-button-)
