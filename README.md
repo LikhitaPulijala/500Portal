@@ -1,29 +1,30 @@
 Table of contents
 =================
 **[Sign up](#sign-up-)**
-  * [Case 1 - Customer clicks on Sign up button](https://github.com/agilecrm/python-api)
-  * [Case 2 - Customer enters email address and clicks “Try for Free”](https://github.com/agilecrm/python-api)
-  * [Case 3 - Customer signs up with google or facebook](https://github.com/agilecrm/php-api)
+  * [Case 1 - Customer clicks on Sign up button](#case-1---customer-clicks-on-sign-up-button-)
+  * [Case 2 - Customer enters email address and clicks “Try for Free”](#case-2---customer-enters-email-address-and-clicks-try-for-free-)
+  * [Case 3 - Customer signs up with google or facebook](#case-3---customer-signs-up-with-google-or-facebook-#sign-in-)
  
-**[Sign in](#)**
-  * [Case 1 - Customer clicks on login](https://github.com/agilecrm/python-api)
-  * [Case 2 - Customer login with google and facebook](https://github.com/agilecrm/python-api)
+**[Sign in](#sign-in-)**
+  * [Case 1 - Customer clicks on login](#case-1---customer-clicks-on-login-)
+  * [Case 2 - Customer login with google and facebook](#case-2---customer-login-with-google-and-facebook-)
   
-**[Get user profile](#)**
+**[Get user profile](#get-user-profile-)**
   
-**[Get all users](#)**  
+**[Get all users](#get-all-users-)**  
 
-**[Get domain details](#)**
+**[Get domain details](#get-domain-details-)**
 
-**[Invite user/Add user](#)**
-  * [Case 1: 500 portal is used to add the new user](https://github.com/agilecrm/python-api)
-  * [Case 2: Migration of users](https://github.com/agilecrm/python-api)
+**[Invite user/Add user](#invite-useradd-user-)**
+  * [Case 1: 500 portal is used to add the new user](#case-1-500-portal-is-used-to-add-the-new-user-)
+  * [Case 2: Migration of users](#case-2-migration-of-users-)
+  * [Case 3: Bulk invite of users](#case-3-bulk-invite-of-users-)
   
-**[Add a new product to existing user](#)**  
+**[Add a new product to existing user](#add-a-new-product-to-existing-user-)**  
 
-**[Remove Subscription](#)**  
+**[Remove Subscription](#remove-subscription-)**  
 
-**[9 dots](#)**
+**[9 dots](#9-dots-)**
 
 Things to know:
 ---------------  
