@@ -74,7 +74,7 @@ https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/1
 This is same as above except the email is included. This is needed with the assumption that every app would have a website as shown in the below where customer shall enter the email address directly to “Try for free”. 
 
 
-
+![Alt text](https://www.google.com/logos/doodles/2019/lucy-wills-131st-birthday-5156345727680512-s.png")
 
 Below url is sample to test the sign up with email
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/take2gk@yopmail.com/2
