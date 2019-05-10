@@ -191,9 +191,12 @@ A rest api on the 500portal side has to be called upon to add all the new users.
 Assumption: The customer has already setup 500 portal account. 
 
 #### Case 3: Bulk invite of users :
-https://{{{app.500_server}}}/core/api/inviteuser
+
 Method:Post
 
+```sh
+curl https://{{{app.500_server}}}/core/api/inviteuser
+```
 Body:
 ```javascript
 email: user1@yopmail.com;user2@yopmail.com
