@@ -91,7 +91,7 @@ https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/google
 Here 500 portal shall validate the user credentials and when it logins successfully it sets the jwt as shown above and routes it to the home page. 
 https://<<appname>>.appup.cloud/<<appname>>/#/home
 
-
+![alt text](https://github.com/LikhitaPulijala/500Portal/blob/master/img/Screenshot%20from%202019-05-10%2018-43-30.png)
 
 Below is the sample url to test the sign in with email
 https://500appss.appup.cloud/copy500apps/#/signin/collab2
