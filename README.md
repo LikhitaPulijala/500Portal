@@ -212,34 +212,34 @@ https://<<appname>>.appup.cloud/<<appname>>/adduser for each product with POST m
 ### Remove Subscription :
 When the domain owner removes an user to one or more products. The system shall perform necessary business validations on its end and may call the below rest api on the app side
 
-https://<< appname >>.appup.cloud/<<appname>>/removeuser for each product with DELETE method.
+https://<< appname >>.appup.cloud/<< appname >>/removeuser for each product with DELETE method.
 
 ### 9 dots :
 There should be a three workflow with a rest node in it.
 
 <apps-launcher url="<<url to hit the defined workflow>>"/>
 
-#### Rest call to intimate inside the workflow
+#### a)Rest call to intimate inside the workflow
 ----------------------------------------------------- 
 restcall:{{{app.500_server}}}/core/api/getallmyapps?appname=yourapp;
 method:get;
 headers:token:jwt_token;
 
-#### Trigger at Appside
+#### b)Trigger at Appside
 -------------------------
 core/api/ninedots/{appname}
 
-#### Workflow at Appside for the trigger
+#### c)Workflow at Appside for the trigger
 ----------------------------------------------
 restcall:{{{app.500_server}}}/core/api/ninedots/{{{request.path.appname}}}?app=yourapp;
 method:get;
 headers:token:jwt_token;
 
-#### Trigger at Appside
+#### d)Trigger at Appside
 ------------------------
 core/api/product/{id}
 
-#### Workflow at Appside for the trigger
+#### e)Workflow at Appside for the trigger
 ----------------------------------------------
 restcall:{{app.500_server}}/core/api/product/{{request.path.id}}?app=yourapp;
 method:get;
