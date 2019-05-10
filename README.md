@@ -76,7 +76,7 @@ https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/1
 This is same as above except the email is included. This is needed with the assumption that every app would have a website as shown in the below where customer shall enter the email address directly to “Try for free”. 
 
 
-<p align="center"><a href="https://vuejs.org" target="_blank" rel="noopener noreferrer"><img width="100" src="https://ibb.co/2gt7BY9" alt="Vue logo"></a></p>
+<p align="center"><a href="https://ibb.co/2gt7BY9" target="_blank" rel="noopener noreferrer"><img width="100" src="https://ibb.co/2gt7BY9" alt="Vue logo"></a></p>
 Below is the sample url to test the sign up with email
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/take2gk@yopmail.com/2
 
