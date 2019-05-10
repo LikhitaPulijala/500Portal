@@ -212,7 +212,7 @@ https://<<appname>>.appup.cloud/<<appname>>/adduser for each product with POST m
 ### Remove Subscription :
 When the domain owner removes an user to one or more products. The system shall perform necessary business validations on its end and may call the below rest api on the app side
 
-https://<<appname>>.appup.cloud/<<appname>>/removeuser for each product with DELETE method.
+https://<< appname >>.appup.cloud/<<appname>>/removeuser for each product with DELETE method.
 
 ### 9 dots :
 There should be a three workflow with a rest node in it.
