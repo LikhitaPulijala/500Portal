@@ -1,5 +1,7 @@
 Table of contents
 =================
+**[500Portal Integration](#500-portal-integration-)**
+
 **[Sign up](#sign-up-)**
   * [Case 1 - Customer clicks on Sign up button](#case-1---customer-clicks-on-sign-up-button-)
   * [Case 2 - Customer enters email address and clicks “Try for Free”](#case-2---customer-enters-email-address-and-clicks-try-for-free-)
