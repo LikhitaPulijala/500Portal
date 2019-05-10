@@ -75,7 +75,7 @@ https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/1
 #### Case 2 - Customer enters email address and clicks “Try for Free” :
 This is same as above except the email is included. This is needed with the assumption that every app would have a website as shown in the below where customer shall enter the email address directly to “Try for free”. 
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://raw.githubusercontent.com/LikhitaPulijala/500Portal/master/img/Screenshot%20from%202019-05-10%2017-56-08.png)
 
 Below is the sample url to test the sign up with email
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/take2gk@yopmail.com/2
