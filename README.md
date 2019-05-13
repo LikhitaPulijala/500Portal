@@ -24,18 +24,18 @@ Table of contents
 
 
 ---------------  
-## 500portal integration :
+# 500portal integration :
 All the apps should be integrated with 500portal to handle the sign up and sign in process. In addition,500 portal takes care of inviting users, billing, invoicing, cancellations, buy/cancel several apps.
 
 This document talks about integrating other applications with 500Portal .  
 
-## Sign up :  
+# Sign up :  
 Signup in 500Portal falls under 5 cases:
-### Case 1 - Customer clicks on Sign up button from 500Portal page :
+## Case 1 - Customer clicks on Sign up button from 500Portal page :
 
 When the user clicks sign up button,we take him to sign up page where he needs to give his email address and clicks for the next page where he needs to enter his name,company name,set a new password for his account and select the type of industry his comapany is based on.
 
-#### dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
+### dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
 
 There should be a workflow with below trigger expression. The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
 
