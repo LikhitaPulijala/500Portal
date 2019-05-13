@@ -66,9 +66,19 @@ The home page url looks like as follows
 https://500appss.appup.cloud/dev/#/home
 ```
 
+## Case 2 - Customer clicks on Sign up button from application(with appname) :
 
+When user opens an application(like supportly),and clicks on sign up button in that application,then user will be redirected to the 500Portal sign up page and the url looks like as follows:
 
-There should be a workflow with below trigger expression. The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
+```sh
+https://500appss.appup.cloud/dev/#/signup?app=support
+```
+
+Now asks user to enter a valid email address,checks for the valid email or not.And if the email is a valid one then takes to the other page and asks to enter his name,company name,set a new password for his account and select the type of industry his comapany is based on.
+
+In this case,the appname will be the name of the application,source by default would be dashboard and a unique fingerprint value will be generated for every new user.
+
+The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
 
 The workflow has to set two values in headers to avoid CORS issue and then a successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side.
  
@@ -94,13 +104,12 @@ tenant_id - the account id of the customer account in 500 portal.
 
 user_id - the user id of the customer account in 500 portal
 
-Then the 500portal shall route to the app’s home page as below
+Then the 500Portal shall route to the app’s home page as below
+```sh
 https://<<appname>>.appup.cloud/<<appname>>/#/home
+```
 
-Below is the sample url to test the sign up with no email
-https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/1
-
-#### Case 2 - Customer enters email address and clicks “Try for Free” :
+## Case 3 - Customer enters email address and clicks “Try for Free” from application :
 This is same as above except the email is included. This is needed with the assumption that every app would have a website as shown in the below where customer shall enter the email address directly to “Try for free”. 
 
 ![alt text](https://raw.githubusercontent.com/LikhitaPulijala/500Portal/master/img/Screenshot%20from%202019-05-10%2017-56-08.png)
@@ -108,9 +117,65 @@ This is same as above except the email is included. This is needed with the assu
 Below is the sample url to test the sign up with email
 https://500appss.appup.cloud/copy500apps/#/signup/collab2/take2gk@yopmail.com/2
 
-#### Case 3 - Customer signs up with google or facebook :
-Below is the sample url to test the sign up with google oauth
-https://500appss.appup.cloud/copy500apps/#/signup/collab2/:value/google
+## Case 4 - Customer signs up with google/facebook/linkedin/office365 from 500Portal(without appname) :
+When clicks on any of the above social networking sites,in first step the authentication process takes place and then authorization takes place.After oauth process,the user will be taken to the 500Portal home page.
+
+In this case,source by would be the selected social website.
+
+### dev/user/domain_user?source=google/facebook/linkedin/office
+If the oauth is failed then no insertion takes place and it doesn't route to his url
+
+### Using curl
+
+Method: POST
+```sh
+curl https://500appss.appup.cloud/dev/user/domain_user?source=facebook
+-H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
+-H "Content-Type: application/json"
+-d '{
+    "name": "500Portal",
+    "company": "Mantra Technologies",
+    "industry": "Software",
+    "password": "500Portal",
+    "email": "500Portal@gmail.com",
+    }' \
+```
+### Response:
+- Status 200: User created successfully.
+- Status 404: If the creation of the new user is failed.
+
+## Case 5 - Customer signs up with google/facebook/linkedin/office365 from 500Portal(with appname) :
+When clicks on any of the above social networking sites,in first step the authentication process takes place and then authorization takes place.After oauth process,the user will be taken to the 500Portal home page.
+
+In this case,source by would be the selected social website.
+
+### dev/user/domain_user?source=google/facebook/linkedin/office
+If the oauth is failed then no insertion takes place and it doesn't route to his url
+
+### Using curl
+
+Method: POST
+```sh
+curl https://500appss.appup.cloud/dev/user/domain_user?source=facebook
+-H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
+-H "Content-Type: application/json"
+-d '{
+    "name": "500Portal",
+    "company": "Mantra Technologies",
+    "industry": "Software",
+    "password": "500Portal",
+    "email": "500Portal@gmail.com",
+    }' \
+```
+### Response:
+- Status 200: User created successfully.
+- Status 404: If the creation of the new user is failed.
+
+
+
+## Case 6 - From "Bulk user invite" link :
+
+When admin invites his users from "Bulk user invite" link,user gets a sign up link to his mail which admin had mentioned earlier.Once the user clicks the link,he will be redirected to 500Portal sign up page and case-1 repeats.
 
 
 ### Sign in : 
@@ -152,16 +217,15 @@ A JSON Object with his profile info and product roles
     ]
 }
 ```
-### Get all users :
-This rest api shall be called to get all users info for a given domain id.
+# Get all users based on particular domain id :
+
+This rest api is used to get all users information based on given domain id.
 
 Method: GET
 ```sh
-curl https://500appss.appup.cloud/copy500apps/users?domain_id=1
+curl https://500appss.appup.cloud/dev/users?domain_id=1
 ```
-RETURNS
-
-A JSON array with all user info and their related product/roles would be returned with 200 OK Response.
+## Returns:
 
 ```javascript
 [
@@ -201,12 +265,96 @@ A JSON array with all user info and their related product/roles would be returne
     }
 ]
 ```
-### Get domain details :
-This api shall be used to get the domain details, like who is the domain owner and when was it opened.
 
-<< TBD >>
+## Response:
+- Status 200: A JSON array with all user information and their related product/roles would be returned.
+- Status 404: The domain_id may not exists.
+
+# Get all users based on particular domain id and user id :
+
+This rest api is used to get the particular user information based on given domain id and user id.
+
+Method: GET
+```sh
+curl https://my.500apps.com/users/2102?domain_id=1570
+```
+## Returns:
+
+```javascript
+{
+"id": 2102,
+"domain_id": 1570,
+"user_id": 2102,
+"name": "Gbnreddy",
+"email": "gbnreddy@yopmail.com",
+"language": "1",
+"logo_url": "https://500-apps.s3.us-west-1.amazonaws.com/4674134-Anonymous-Quote-Ignore-the-noise-focus-on-your-work.jpg",
+"phone": "8919407439",
+"gender": "male",
+"timezone": "Universal Coordinated Time(GMT)",
+"currency": "Canadian Dollar",
+"currency_symbol": "CAD",
+"created_by": 12345,
+"created_date": "Apr 23, 2019 2:03:07 AM",
+"products": [
+{
+"role": "admin",
+"product": "build"
+},
+{
+"role": "admin",
+"product": "finder"
+},
+{
+"role": "admin",
+"product": "recruit"
+},
+{
+"role": "admin",
+"product": "sign"
+},
+{
+"role": "admin",
+"product": "flow"
+},
+{
+"role": "admin",
+"product": "track"
+},
+{
+"role": "admin",
+"product": "schedule"
+},
+{
+"role": "admin",
+"product": "hipsocial"
+},
+{
+"role": "admin",
+"product": "support"
+},
+{
+"role": "admin",
+"product": "collab"
+},
+{
+"role": "admin",
+"product": "agilecrm"
+},
+{
+"role": "admin",
+"product": "clickdesk"
+}
+]
+}
+```
+
+## Response:
+- Status 200: A JSON array with particular user information and his related product/roles would be returned.
+- Status 404: The domain_id/user id may not exists.
+
 	
-### Invite user/Add user : 
+# Invite user/Add user : 
 
 #### Case 1: 500 portal is used to add the new user :	
 Whenever the domain owner adds a new user to one or more products. The system shall do the necessary verification and setup on its end and may call the below rest api that is expected to be present on the app side. This is to give the app a hook to perform any actions needed for the new user.
