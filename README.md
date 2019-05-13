@@ -113,8 +113,6 @@ https://<<appname>>.appup.cloud/<<appname>>/#/home
 ## Case 3 - Customer enters email address and clicks “Try for Free” from application :
 This is same as above except the email is included. This is needed with the assumption that every app would have a website as shown in the below where customer shall enter the email address directly to “Try for free”. 
 
-![alt text](https://raw.githubusercontent.com/LikhitaPulijala/500Portal/master/img/Screenshot%20from%202019-05-10%2017-56-08.png)
-
 After clicking “Try for free” ,user will be redirected to 500Portal signup page and case-1 repeats.
 
 ## Case 4 - Customer signs up with google/facebook/linkedin/office365 from 500Portal(from 500Portal page) :
@@ -187,16 +185,11 @@ Here 500 portal shall validate the user credentials and when it logins successfu
 ```sh
 https://500appss.appup.cloud/dev/#/home
 ```
-![alt text](https://github.com/LikhitaPulijala/500Portal/blob/master/img/Screenshot%20from%202019-05-10%2018-43-30.png)
-
 
 #### Case 2 - Customer clicks on login from application :
 When user clicks login from other application(examle supportly)then  500 portal shall validate the user credentials and when it logins successfully it sets the jwt as shown above and routes it to that application's home page. 
 
 https://<<appname>>.appup.cloud/<<appname>>/#/home
-
-![alt text](https://github.com/LikhitaPulijala/500Portal/blob/master/img/Screenshot%20from%202019-05-10%2018-43-30.png)
-
 
 #### Case 3 - Customer login with google and facebook from 500portal :
 When clicks on any of the above social networking sites from 500portal,in first step the authentication process takes place and then authorization takes place.After oauth process,500Portal verifies th email and if the email is already in database it redirects user to 500Portal home page.
