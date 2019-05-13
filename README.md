@@ -356,12 +356,51 @@ curl https://my.500apps.com/users/2102?domain_id=1570
 	
 # Invite user/Add user : 
 
-#### Case 1: 500 portal is used to add the new user :	
+## Case 1: 500 portal is used to add the new user :	
 Whenever the domain owner adds a new user to one or more products. The system shall do the necessary verification and setup on its end and may call the below rest api that is expected to be present on the app side. This is to give the app a hook to perform any actions needed for the new user.
+The admin needs to provide user's name,email,choose the role,select for trial/subscribe and select the product that he wants to provide for the user.
+## 500Portal user insert:
 
-https://<< appname >>.appup.cloud/<< appname >>/users for each product with POST method.
-	
-#### Case 2: Migration of users :	
+### dev/core/api/addTeamUser/domain_user/domain_user_role?email="user1@yopmail.com"
+
+### Using curl
+
+Method:POST
+```sh
+curl https://500appss.appup.cloud/dev/core/api/addTeamUser/domain_user/domain_user_role?email=user1@yopmail.com
+-q "email: vintage1@yopmail.com"
+-d "name: vintage1"
+-d "email: vintage1@yopmail.com"
+-d "role: user"
+-d "products: 10"
+-d "is_trial: 0"
+https://<< appname >>.appup.cloud/<< appname >>/users
+```
+## Response:
+- Status 200: A user is created succesfully for that admin.
+- Status 404: The user given already existed.
+
+## Appside insert:
+
+### dev/core/api/appinsert
+
+### Using curl
+
+Method:POST
+```sh
+curl https://500appss.appup.cloud/dev/core/api/appinsert
+-d "name: vintage1"
+-d "email: vintage1@yopmail.com"
+-d "role: user"
+-d "products: 10"
+-d "url: https://<< appname >>.appup.cloud/<< appname >>/adduser"
+```
+## Response:
+- Status 200: When a appside insertion of user is successful.
+- Status 400: When url at app is not correct.
+
+
+## Case 2: Migration of users :	
 This scenario happens when migrating customers and their users from AgileCRM to Supportly. 
 
 A rest api on the 500portal side has to be called upon to add all the new users.
@@ -370,80 +409,78 @@ A rest api on the 500portal side has to be called upon to add all the new users.
 
 Assumption: The customer has already setup 500 portal account. 
 
-#### Case 3: Bulk invite of users :
+## Case 3: Bulk invite of users :
 
-Method:Post
+This scenario comes when admin adds many number of users at a time by sending link to that user email address.
+
+### Using curl
+
+### dev/core/api/inviteuser
+
+Method:POST
 
 ```sh
-curl https://{{{app.500_server}}}/core/api/inviteuser
+curl https://500appss.appup.cloud/dev/core/api/inviteuser
+-d "email: user1@yopmail.com;user2@yopmail.com"
+-d "message: test invite link"
+-d "https://500appss.appup.cloud/dev/#/signup?ZG9tYWluX2lkPTM4NDgmaG91cnM9MTUmbWludXRlcz00JnNlY29uZHM9MTQmZGF0ZT0xMy8wNS8yMDE5"
 ```
-Body:
-```javascript
-email: user1@yopmail.com;user2@yopmail.com
-message: test invite link
-invite_link: https://{{{app.500_server}}}/#/signup?ZG9tYWluX2lkPTE0NDEmaG91cnM9MTYmbWludXRlcz0yOSZzZWNvbmRzPTcmZGF0ZT0yNS8wNC8yMDE5&app={{appname}}
-```
-Invite_link is generated in js
 
-var d = new Date();
-
-var hours = d.getHours();
-
-var minutes = d.getMinutes();
-
-var seconds = d.getSeconds();
-
-var date = new Date().toLocaleString().split(',')[0];
-
-var params = "domain_id="+this.domain+"&hours="+hours+"&minutes="+minutes+"&seconds="+seconds+"&date="+date;
-
-var b = btoa(params);
-
- https://{{{app.500_server}}}/#/signup?b&app={{appname}}
-
-### Add a new product to existing user :
-This will be treated same as invite user/add user section. The below api on the app side shall be called upon for each product.
+# Add a new product to existing user :
+This will be treated same as invite user/add user section. The below api on the app side shall be called upon for each product.Admin can add any number of products to the particular user.
 
 Method:POST
 ```sh
-https://<< appname >>.appup.cloud/<< appname >>/adduser
+curl https://<< appname >>.appup.cloud/<< appname >>/adduser https://500appss.appup.cloud/dev/core/api/addproduct/domain_user_role/3187
+-d "name: vintage1"
+-d "email: vintage1@yopmail.com"
+-d "role: user"
+-d "products: 8"
+-d "domain_user_id: 3187"
+-d "is_trial: 0"
 ```
 
-### Remove Subscription :
-When the domain owner removes an user to one or more products. The system shall perform necessary business validations on its end and may call the below rest api on the app side for each product.
-
-Method:DELETE
-
+# 9 dots :
+To implement nine dots in your applications and get data of that user,your application should contain some workflows with rest node in it.
+The below component must mention in your page to get info regarding nine dots.
 ```sh
-
-https://<< appname >>.appup.cloud/<< appname >>/removeuser
+<apps-launcher url="<<url to hit the defined workflow>>"/>
 ```
 
-### 9 dots :
-There should be a workflow with a rest node in it.
+## a)Rest call to intimate inside the workflow
+A workflow should be created at appside with a rest node in it.The token must pass in header.
+### Using curl
 
-<apps-launcher url="<<url to hit the defined workflow>>"/>
-
-#### a)Rest call to intimate inside the workflow
-
-Method:GET;
+Method:GET
 ```sh
 curl {{{app.500_server}}}/core/api/getallmyapps?appname=yourapp
 -H "token:jwt_token"
 ```
-#### b)Trigger at Appside
+## b)Trigger at Appside
+A trigger with this expression should be created at appside.
+```sh
 core/api/ninedots/{appname}
+```
 
-#### c)Workflow at Appside for the trigger
-Method:GET;
+## c)Workflow at Appside for the trigger
+A workflow should be created at appside with a rest node in it.The token must pass in header.
+### Using curl
+
+Method:GET
 ```sh
 curl {{{app.500_server}}}/core/api/ninedots/{{{request.path.appname}}}?app=yourapp
 -H "token:jwt_token"
 ```
-#### d)Trigger at Appside
-core/api/product/{id}
 
-#### e)Workflow at Appside for the trigger
+## d)Trigger at Appside
+A trigger with this expression should be created at appside.
+```sh
+core/api/product/{id}
+```
+## e)Workflow at Appside for the trigger
+A workflow should be created at appside with a rest node in it.The token must pass in header.
+### Using curl
+
 Method:GET
 
 ```sh
@@ -451,7 +488,7 @@ curl {{app.500_server}}/core/api/product/{{request.path.id}}?app=yourapp
 -H "token:jwt_token"
 ```
 
-### Logout :
+# Logout :
 Remove token in the cookie and redirect to login page.
 	
 
