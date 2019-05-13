@@ -24,8 +24,8 @@ Table of contents
 
 
 ---------------  
-# 500portal integration :
-All the apps should be integrated with 500portal to handle the sign up and sign in process. In addition,500 portal takes care of inviting users, billing, invoicing, cancellations, buy/cancel several apps.
+# 500Portal integration :
+500Portal is the main gateway for all the applications.All the apps should be integrated with 500portal to handle the sign up and sign in process. In addition,500 portal takes care of inviting users,adding products to the user,access for admin and users to subscribe/trial all the apps in the suite,billing for the selected apps,creating invoices for the subscriptions, able to pause/cancel any number of apps by both admin and user.
 
 This document talks about integrating other applications with 500Portal .  
 
@@ -81,7 +81,8 @@ In this case,the appname will be the name of the application,source by default w
 The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
 
 The workflow has to set two values in headers to avoid CORS issue and then a successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side.
- 
+### Using curl
+
 Method:POST
 
 ```sh
@@ -114,13 +115,14 @@ This is same as above except the email is included. This is needed with the assu
 
 ![alt text](https://raw.githubusercontent.com/LikhitaPulijala/500Portal/master/img/Screenshot%20from%202019-05-10%2017-56-08.png)
 
-Below is the sample url to test the sign up with email
-https://500appss.appup.cloud/copy500apps/#/signup/collab2/take2gk@yopmail.com/2
+After clicking “Try for free” ,user will be redirected to 500Portal signup page and case-1 repeats.
 
-## Case 4 - Customer signs up with google/facebook/linkedin/office365 from 500Portal(without appname) :
-When clicks on any of the above social networking sites,in first step the authentication process takes place and then authorization takes place.After oauth process,the user will be taken to the 500Portal home page.
+## Case 4 - Customer signs up with google/facebook/linkedin/office365 from 500Portal(from 500Portal page) :
+When clicks on any of the above social networking sites,in first step the authentication process takes place and then authorization takes place.After oauth process,the user will be taken to the 500Portal sign up page and needs to give his email address and clicks for the next page where he needs to enter his name,company name and select the type of industry his comapany is based on.
 
-In this case,source by would be the selected social website.
+In this case,source by would be the selected social website and we doesn't show the password field and doesn't verify code when signing up from social websites.
+
+After this,the user will be directly taken to 500Portal home page.
 
 ### dev/user/domain_user?source=google/facebook/linkedin/office
 If the oauth is failed then no insertion takes place and it doesn't route to his url
@@ -144,13 +146,13 @@ curl https://500appss.appup.cloud/dev/user/domain_user?source=facebook
 - Status 200: User created successfully.
 - Status 404: If the creation of the new user is failed.
 
-## Case 5 - Customer signs up with google/facebook/linkedin/office365 from 500Portal(with appname) :
-When clicks on any of the above social networking sites,in first step the authentication process takes place and then authorization takes place.After oauth process,the user will be taken to the 500Portal home page.
+## Case 5 - Customer signs up with google/facebook/linkedin/office365 from other applications :
+When clicks on any of the above social networking sites,in first step the authentication process takes place and then authorization takes place.After oauth process,the user will be taken to the particular home page.
 
 In this case,source by would be the selected social website.
 
 ### dev/user/domain_user?source=google/facebook/linkedin/office
-If the oauth is failed then no insertion takes place and it doesn't route to his url
+If the oauth is failed then no insertion takes place and it doesn't route to appside home url.
 
 ### Using curl
 
@@ -180,24 +182,34 @@ When admin invites his users from "Bulk user invite" link,user gets a sign up li
 
 ### Sign in : 
 
-#### Case 1 - Customer clicks on login :
-Here 500 portal shall validate the user credentials and when it logins successfully it sets the jwt as shown above and routes it to the home page. 
+#### Case 1 - Customer clicks on login from 500Portal :
+Here 500 portal shall validate the user credentials and when it logins successfully it sets the jwt as shown above and routes it to the 500portal home page. 
+```sh
+https://500appss.appup.cloud/dev/#/home
+```
+![alt text](https://github.com/LikhitaPulijala/500Portal/blob/master/img/Screenshot%20from%202019-05-10%2018-43-30.png)
+
+
+#### Case 2 - Customer clicks on login from application :
+When user clicks login from other application(examle supportly)then  500 portal shall validate the user credentials and when it logins successfully it sets the jwt as shown above and routes it to that application's home page. 
+
 https://<<appname>>.appup.cloud/<<appname>>/#/home
 
 ![alt text](https://github.com/LikhitaPulijala/500Portal/blob/master/img/Screenshot%20from%202019-05-10%2018-43-30.png)
 
-Below is the sample url to test the sign in with email
-https://500appss.appup.cloud/copy500apps/#/signin/collab2
 
-#### Case 2 - Customer login with google and facebook :
-Coming soon
+#### Case 3 - Customer login with google and facebook from 500portal :
+When clicks on any of the above social networking sites from 500portal,in first step the authentication process takes place and then authorization takes place.After oauth process,500Portal verifies th email and if the email is already in database it redirects user to 500Portal home page.
+
+#### Case 4 - Customer login with google and facebook from other applications :
+When clicks on any of the above social networking sites from other applications,in first step the authentication process takes place and then authorization takes place.After oauth process,500Portal verifies th email and if the email is already in database it redirects user to that particular app home page.
 
 ### Get user profile :
 This rest api shall be used to get a particular user profile of a given domain
 ```sh
 curl https://500appss.appup.cloud/copy500apps/users/36?domain_id=1
 ```
-RETURNS 
+## Returns: 
 
 A JSON Object with his profile info and product roles
 ```javascript
