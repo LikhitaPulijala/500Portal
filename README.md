@@ -38,8 +38,11 @@ When the user clicks sign up button,we take him to sign up page where he needs t
 In this case,the appname will be empty,source by default would be dashboard and a unique fingerprint value will be generated for every new user.
 
 ### dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
-Method: POST
+The email that entered should be valid one and the password that entered should be minimum of 8 characters.If the fields doesn't match the required validations,the user cannot be created.
 
+### Using curl
+
+Method: POST
 ```sh
 curl https://500appss.appup.cloud/dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
 -H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
@@ -51,6 +54,16 @@ curl https://500appss.appup.cloud/dev/insert/signup/domain/domain_user?appname=&
     "password": "500Portal",
     "email": "500Portal@gmail.com",
     }' \
+```
+### Response:
+- Status 200: User created successfully. And takes him to the verification page.
+- Status 404: If the creation of the new user is failed.
+
+If creation of user is succesful then a mail is send to the given address with a verification code in it and user is taken to the new page and asked to enter the verification code that is sent in the mail.
+Once the entered code is verified and is successfull,then the user is taken to the home page. 
+The home page url looks like as follows
+```sh
+https://500appss.appup.cloud/dev/#/home
 ```
 
 
