@@ -7,16 +7,16 @@ Table of contents
 **[Sign in](#sign-in-)**
   
 **[Get user profile](#get-user-profile-)**
+
+**[Get all users based on particular domain id](#get-all-users-based-on-particular-domain-id-)**
   
-**[Get all users](#get-all-users-)**  
+**[Get all users based on particular domain id and user id](#get-all-users-based-on-particular-domain-id-and-user-id-)**
 
 **[Get domain details](#get-domain-details-)**
 
 **[Invite user/Add user](#invite-useradd-user-)**
   
 **[Add a new product to existing user](#add-a-new-product-to-existing-user-)**  
-
-**[Remove Subscription](#remove-subscription-)**  
 
 **[9 dots](#9-dots-)**
 
