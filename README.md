@@ -3,13 +3,8 @@ Table of contents
 **[500Portal Integration](#500portal-integration-)**
 
 **[Sign up](#sign-up-)**
-  * [Case 1 - Customer clicks on Sign up button](#case-1---customer-clicks-on-sign-up-button-)
-  * [Case 2 - Customer enters email address and clicks “Try for Free”](#case-2---customer-enters-email-address-and-clicks-try-for-free-)
-  * [Case 3 - Customer signs up with google or facebook](#case-3---customer-signs-up-with-google-or-facebook-#sign-in-)
- 
+  
 **[Sign in](#sign-in-)**
-  * [Case 1 - Customer clicks on login](#case-1---customer-clicks-on-login-)
-  * [Case 2 - Customer login with google and facebook](#case-2---customer-login-with-google-and-facebook-)
   
 **[Get user profile](#get-user-profile-)**
   
@@ -18,9 +13,6 @@ Table of contents
 **[Get domain details](#get-domain-details-)**
 
 **[Invite user/Add user](#invite-useradd-user-)**
-  * [Case 1: 500 portal is used to add the new user](#case-1-500-portal-is-used-to-add-the-new-user-)
-  * [Case 2: Migration of users](#case-2-migration-of-users-)
-  * [Case 3: Bulk invite of users](#case-3-bulk-invite-of-users-)
   
 **[Add a new product to existing user](#add-a-new-product-to-existing-user-)**  
 
@@ -38,8 +30,13 @@ All the apps should be integrated with 500portal to handle the sign up and sign 
 This document talks about integrating other applications with 500Portal .  
 
 ### Sign up :  
+Signup in 500Portal falls under 5 cases:
+#### Case 1 - Customer clicks on Sign up button from 500Portal page :
 
-#### Case 1 - Customer clicks on Sign up button :
+When the user clicks sign up button,we take him to sign up page where he needs to give his email address and clicks for the next page where he needs to enter his name,company name,set a new password for his account and select the type of industry his comapany is based on.
+
+##### dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
+
 There should be a workflow with below trigger expression. The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
 
 The workflow has to set two values in headers to avoid CORS issue and then a successful routing happens. A 200 OK response has to be sent back after the default things are performed on app side.
