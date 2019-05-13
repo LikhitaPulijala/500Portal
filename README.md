@@ -31,11 +31,29 @@ This document talks about integrating other applications with 500Portal .
 
 # Sign up :  
 Signup in 500Portal falls under 5 cases:
-## Case 1 - Customer clicks on Sign up button from 500Portal page :
+## Case 1 - Customer clicks on Sign up button from 500Portal page(without appname) :
 
 When the user clicks sign up button,we take him to sign up page where he needs to give his email address and clicks for the next page where he needs to enter his name,company name,set a new password for his account and select the type of industry his comapany is based on.
 
+In this case,the appname will be empty,source by default would be dashboard and a unique fingerprint value will be generated for every new user.
+
 ### dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
+Method: POST
+
+```sh
+curl https://500appss.appup.cloud/dev/insert/signup/domain/domain_user?appname=&fingerprint=87c14e71d763fc527e78ac149c07f21a&source=dashboard
+-H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
+-H "Content-Type: application/json"
+-d '{
+    "name": "500Portal",
+    "company": "Mantra Technologies",
+    "industry": "Software",
+    "password": "500Portal",
+    "email": "500Portal@gmail.com",
+    }' \
+```
+
+
 
 There should be a workflow with below trigger expression. The idea is once the 500 portal has successfully registered the user, the below url would be called upon to perform any default things on the app side for the new account.
 
@@ -45,7 +63,7 @@ Method:POST
 
 ```sh
 curl https://<<appname>>.appup.cloud/<<appname>>/accountsignup 
--H "Access-Control-Allow-Origin:https://500appss.appup.cloud"
+-H "Accept : application/json"
 -H "Access-Control-Allow-Credentials:true"
 ```
 Once the sign up process is done, a jwt token shall be set with payload data
